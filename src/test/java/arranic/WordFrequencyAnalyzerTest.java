@@ -32,7 +32,8 @@ public class WordFrequencyAnalyzerTest {
         assertEquals(4, result.size());
 
         // Verify that the BufferedReader was closed
-        verify(reader, times(1)).close();
+        verify(reader).close();
+        // verify(reader, times(1)).close();
     }
 
     @Test
