@@ -50,29 +50,41 @@ public class WordFrequencyAnalyzer extends Application {
         }
     }
 
-    static Map<String, Integer> processWikimediaDump(String filePath) throws IOException {
+    // Modify the method to accept a BufferedReader
+    static Map<String, Integer> processWikimediaDump(BufferedReader reader) throws IOException {
         Map<String, Integer> wordFrequencies = new HashMap<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                // Process each line and update word frequencies
-                updateWordFrequencies(line, wordFrequencies);
-            }
+        String line;
+        while ((line = reader.readLine()) != null) {
+            // Process each line and update word frequencies
+            updateWordFrequencies(line, wordFrequencies);
         }
 
         return wordFrequencies;
+    }
+
+    // Add a new method for the original behavior (reading from a file path)
+    static Map<String, Integer> processWikimediaDump(String filePath) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            return processWikimediaDump(reader);
+        }
     }
 
     static void updateWordFrequencies(String line, Map<String, Integer> wordFrequencies) {
         String[] words = line.split("\\s+"); // Split by whitespace
 
         for (String word : words) {
-            // You may need more advanced preprocessing here
             word = word.replaceAll("[^a-zA-Z]", "").toLowerCase();
 
             if (!word.isEmpty()) {
-                wordFrequencies.put(word, wordFrequencies.get(word) + 1);
+                // Check if the word is already in the map
+                if (wordFrequencies.containsKey(word)) {
+                    // Increment the count
+                    wordFrequencies.put(word, wordFrequencies.get(word) + 1);
+                } else {
+                    // Initialize the count to 1 if the word is not present
+                    wordFrequencies.put(word, 1);
+                }
             }
         }
     }

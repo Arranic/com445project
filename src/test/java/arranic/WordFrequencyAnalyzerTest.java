@@ -3,6 +3,8 @@ package arranic;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import arranic.PowerLaw.PowerLawParameters;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,7 +22,7 @@ public class WordFrequencyAnalyzerTest {
         when(reader.readLine()).thenReturn("word1 word2", "word3 word4", null);
 
         // Call the method under test
-        Map<String, Integer> result = WordFrequencyAnalyzer.processWikimediaDump("fakePath");
+        Map<String, Integer> result = WordFrequencyAnalyzer.processWikimediaDump(reader);
 
         // Verify that the expected word frequencies are present
         assertEquals(1, result.get("word1"));
@@ -47,18 +49,16 @@ public class WordFrequencyAnalyzerTest {
     }
 
     @Test
-    void testFitPowerLaw() {
-        // Create a sample word frequency map
+    public void testFitPowerLaw() {
         Map<String, Integer> wordFrequencies = new HashMap<>();
-        wordFrequencies.put("word1", 2);
-        wordFrequencies.put("word2", 3);
-        wordFrequencies.put("word3", 4);
+        wordFrequencies.put("apple", 10);
+        wordFrequencies.put("banana", 15);
 
-        // Call the method under test
-        WordFrequencyAnalyzer.PowerLawParameters params = WordFrequencyAnalyzer.fitPowerLaw(wordFrequencies);
+        PowerLawParameters params = PowerLaw.fitPowerLaw(wordFrequencies);
 
-        // Verify that the expected parameters are calculated
-        assertEquals(1.0, params.getExponent(), 0.01); // Replace with your expected values
-        assertEquals(1.0, params.getScalingFactor(), 0.01); // Replace with your expected values
+        // Test the correctness of the fitting
+        assertEquals(2.2239010857415096, params.getExponent(), 0.01); // Adjust the delta based on your expected
+                                                                      // precision
+        assertEquals(0.27, params.getScalingFactor(), 0.01); // Adjust the delta based on your expected precision
     }
 }
