@@ -74,7 +74,7 @@ public class WordFrequencyAnalyzer extends Application {
         String[] words = line.split("\\s+"); // Split by whitespace
 
         for (String word : words) {
-            word = word.replaceAll("[^a-zA-Z]", "").toLowerCase();
+            word = word.toLowerCase();
 
             if (!word.isEmpty()) {
                 // Check if the word is already in the map
