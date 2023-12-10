@@ -64,7 +64,7 @@ public class WordFrequencyAnalyzer extends Application {
         return wordFrequencies;
     }
 
-    private static void updateWordFrequencies(String line, Map<String, Integer> wordFrequencies) {
+    static void updateWordFrequencies(String line, Map<String, Integer> wordFrequencies) {
         String[] words = line.split("\\s+"); // Split by whitespace
 
         for (String word : words) {
