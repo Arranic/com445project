@@ -50,7 +50,7 @@ public class WordFrequencyAnalyzer extends Application {
         }
     }
 
-    private static Map<String, Integer> processWikimediaDump(String filePath) throws IOException {
+    static Map<String, Integer> processWikimediaDump(String filePath) throws IOException {
         Map<String, Integer> wordFrequencies = new HashMap<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
