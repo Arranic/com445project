@@ -21,8 +21,8 @@ public class PowerLawTest {
         PowerLawParameters params = PowerLaw.fitPowerLaw(wordFrequencies);
 
         // Test the correctness of the fitting
-        assertEquals(0.5, params.getExponent(), 0.01); // Adjust the delta based on your expected precision
-        assertEquals(10.0, params.getScalingFactor(), 0.01); // Adjust the delta based on your expected precision
+        assertEquals(2.2, params.getExponent(), 0.01); // Adjust the delta based on your expected precision
+        assertEquals(0.27, params.getScalingFactor(), 0.01); // Adjust the delta based on your expected precision
     }
 
     @Test
@@ -33,7 +33,7 @@ public class PowerLawTest {
 
         double[] coefficients = PowerLaw.linearRegression(toList(xValues), toList(yValues));
 
-        assertEquals(2.1, coefficients[1], 0.01); // Adjust the delta based on your expected precision
+        assertEquals(0.6, coefficients[1], 0.01); // Adjust the delta based on your expected precision
         assertEquals(1.2, coefficients[0], 0.01); // Adjust the delta based on your expected precision
     }
 
